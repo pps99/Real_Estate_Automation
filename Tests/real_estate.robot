@@ -14,7 +14,7 @@ Search and Validate Real Estate Listings with Filters
     real_estate_app.Dismiss Policy Notification
     real_estate_app.Search and Verify Suggestion    ${CityName}
     real_estate_app.Click Filter Icon
-    real_estate_app.Set Search Criteria and Categories  ${MaxPrice}
+    real_estate_app.Set Search Criteria and Categories  ${MaxPrice}     ${PropertyType}     ${BedroomSize}
     real_estate_app.Check The First Result
     real_estate_app.Verify The Details Of Results
 

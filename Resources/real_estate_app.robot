@@ -22,8 +22,8 @@ Click Filter Icon
     Click HomePage Filters Icon
 
 Set Search Criteria and Categories
-    [Arguments]     ${MaxPrice}
-    Search By Categories    ${MaxPrice}
+    [Arguments]     ${MaxPrice}     ${PropertyType}     ${BedroomSize}
+    Search By Categories    ${MaxPrice}     ${PropertyType}     ${BedroomSize}
 
 Check The First Result
     Click The First Search Result On HomePage
