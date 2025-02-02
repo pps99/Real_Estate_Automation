@@ -27,21 +27,31 @@ Click For Sale Button
     Wait Until Page Contains Element   ${ForSaleButton}
     Click Element    ${ForSaleButton}
 
-Scroll and Select Value
+ Scroll and Select Value
     [Arguments]     ${MaxPrice}
+    
     Wait Until Page Contains Element    ${ClickMaxPrice}
     Click Element   ${ClickMaxPrice}
+    
+    ${Status} =    Run Keyword And Return Status    Page Should Contain Text    ${MaxPrice}
+    
     WHILE    ${Status} == False
-        # Check if target element exists after scrolling
-        Sleep   1
+        # Check if target element is present
         ${Status} =    Run Keyword And Return Status    Page Should Contain Text    ${MaxPrice}
-        ${TargetValue}  Set Variable        xpath=//android.view.ViewGroup[@content-desc="${MaxPrice}"]
+        
         IF    ${Status} == True
-                Run Keyword And Return      Click Element   ${TargetValue}
+            ${TargetValue}  Set Variable        xpath=//android.view.ViewGroup[@content-desc="${MaxPrice}"]
+            Wait Until Element Is Visible    ${TargetValue}    timeout=2s
+            Click Element   ${TargetValue}
+            BREAK
         END
-
-        &{scrollGesture} =    Create Dictionary    height=${114}    width=${381}    left=${755}     top=${1194}   direction=down    percent=${1.5}
+        
+        # Scroll with a smaller step to avoid skipping
+        &{scrollGesture} =    Create Dictionary    height=${114}    width=${381}    left=${755}     top=${1194}   direction=down    percent=${0.7}
         Execute Script      mobile: scrollGesture    &{scrollGesture}
+        
+        # Small delay to let UI update
+        Sleep   0.5s
     END
 
 Choose Bedroom Size
